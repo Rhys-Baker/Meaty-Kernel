@@ -1,0 +1,24 @@
+{
+    "name": "Distrobox OSDev",
+    "workspaceFolder": "/home/username/project",
+    "remoteUser": "username",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.cmake-tools"
+            ],
+            "settings": {
+                "C_Cpp.default.compilerPath": "/usr/bin/gcc",
+                "C_Cpp.default.includePath": [
+                    "/usr/include",
+                    "/usr/local/include"
+                ],
+                "C_Cpp.default.intelliSenseMode": "gcc-x64"
+            }
+        }
+    },
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/home/username/project,type=bind,consistency=cached"
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "configurations": [
+        {
+            "name": "i686-elf",
+            "compilerPath": "/home/baker/opt/cross/bin/i686-elf-gcc",
+            "cStandard": "c99",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x86",
+            "includePath": [
+                "/home/baker/opt/cross/lib/gcc/i686-elf/16.0.0/include",
+                "/home/baker/opt/cross/lib/gcc/i686-elf/16.0.0/include-fixed",
+                "/home/baker/opt/cross/lib/gcc/i686-elf/16.0.0/../../../../i686-elf/include",
+                "${workspaceFolder}/kernel/include",
+                "${workspaceFolder}/libc/include"
+            ],
+            "defines": [
+                "__ELF__",
+                "__i686__",
+                "__STDC_HOSTED__=0"
+            ],
+            "compilerArgs": [
+                "-ffreestanding"
+            ],
+            "forcedInclude": [
+                "${workspaceFolder}/.vscode/target.h"
+            ]
+        }
+    ],
+    "version": 4
+}
