@@ -1,5 +1,14 @@
 #include <stdio.h>
 
 int puts(const char *string){
-    return printf("%s\n", string);
+    int i=0;
+    while(string[i]){
+        if(putchar(string[i]) == EOF){
+            return EOF;
+        }
+    }
+    if(putchar('\n') == EOF){
+        return EOF;
+    }
+    return 1;
 }
