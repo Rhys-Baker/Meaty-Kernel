@@ -25,7 +25,6 @@ int printf(const char *restrict format, ...){
             format++;
             switch(*format){
                 case 'c':
-                    // 
                     char c = (char)va_arg(args, int);
                     putchar(c);
                     break;
