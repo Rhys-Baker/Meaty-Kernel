@@ -7,6 +7,9 @@
 
 #include "vga.h"
 
+
+bool escaped = false;
+
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
 static uint16_t *const VGA_MEMORY = (uint16_t *) 0xB8000;
@@ -50,6 +53,17 @@ void terminal_scroll(){
 }
 
 void terminal_putchar(char c){
+	if(escaped){
+		terminal_setcolor(c);
+		escaped = false;
+		return;
+	}
+	
+	if(c == '\x1B'){
+		escaped = true;
+		return;
+	}
+	
 	// Newline
 	if(c == '\n'){
 		if (++terminal_row == VGA_HEIGHT){
@@ -71,20 +85,7 @@ void terminal_putchar(char c){
 }
 
 void terminal_write(const char* data, size_t size){
-	bool escaped = false;
 	for (size_t i = 0; i < size; i++){
-		if(escaped){
-			terminal_color = data[i];
-			escaped = false;
-			continue;
-		}
-
-		if(data[i] == '\x1B'){
-			// Escape character for color codes
-			escaped=true;
-			continue;
-		}
-		// If character is printable, print it
 		terminal_putchar(data[i]);
 	}
 }
