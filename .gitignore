@@ -1,3 +1,4 @@
 *.iso
 isodir
 sysroot
+.vscode/c_cpp_properties.json
