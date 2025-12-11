@@ -1,8 +1,9 @@
 #include <stdio.h>
 
 #include <limits.h>
-#include <stdbool.h>
 #include <stdarg.h>
+#include <stdbool.h>
+#include <stdint.h>
 #include <string.h>
 
 static bool print(const char *data, size_t length){
