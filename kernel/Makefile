@@ -23,29 +23,32 @@ ARCHDIR=arch/$(HOSTARCH)
 include $(ARCHDIR)/make.config
 
 CFLAGS:=$(CFLAGS) $(KERNEL_ARCH_CFLAGS)
+# Disable FPU instructions only for ISR files
+$(KERNEL_ARCH_IRQ_OBJS): CFLAGS += -mno-80387 -mno-fp-ret-in-387 -mno-sse -mno-sse2
 CPPFLAGS:=$(CPPFLAGS) $(KERNEL_ARCH_CPPFLAGS)
 LDFLAGS:=$(LDFLAGS) $(KERNEL_ARCH_LDFLAGS)
 LIBS:=$(LIBS) $(KERNEL_ARCH_LIBS)
 
 KERNEL_OBJS=\
 $(KERNEL_ARCH_OBJS) \
+$(KERNEL_ARCH_IRQ_OBJS) \
 kernel/kernel.o\
 
 OBJS=\
-$(ARCHDIR)/crti.o \
-$(ARCHDIR)/crtbegin.o \
+$(ARCHDIR)/crt/crti.o \
+$(ARCHDIR)/crt/crtbegin.o \
 $(KERNEL_OBJS) \
-$(ARCHDIR)/crtend.o \
-$(ARCHDIR)/crtn.o\
+$(ARCHDIR)/crt/crtend.o \
+$(ARCHDIR)/crt/crtn.o\
 
 LINK_LIST=\
 $(LDFLAGS) \
-$(ARCHDIR)/crti.o \
-$(ARCHDIR)/crtbegin.o \
+$(ARCHDIR)/crt/crti.o \
+$(ARCHDIR)/crt/crtbegin.o \
 $(KERNEL_OBJS) \
 $(LIBS) \
-$(ARCHDIR)/crtend.o \
-$(ARCHDIR)/crtn.o
+$(ARCHDIR)/crt/crtend.o \
+$(ARCHDIR)/crt/crtn.o
 
 .PHONY: all clean install install-headers install-kernel
 .SUFFIXES: .o .c .asm
@@ -56,7 +59,7 @@ myos.kernel: $(OBJS) $(ARCHDIR)/linker.ld
 	$(CC) -T $(ARCHDIR)/linker.ld -o $@ $(CFLAGS) $(LINK_LIST)
 	grub-file --is-x86-multiboot myos.kernel
 
-$(ARCHDIR)/crtbegin.o $(ARCHDIR)/crtend.o:
+$(ARCHDIR)/crt/crtbegin.o $(ARCHDIR)/crt/crtend.o:
 	OBJ=`$(CC) $(CFLAGS) $(LDFLAGS) -print-file-name=$(@F)` && cp "$$OBJ" $@
 
 .c.o:
@@ -67,8 +70,9 @@ $(ARCHDIR)/crtbegin.o $(ARCHDIR)/crtend.o:
 
 clean:
 	rm -f myos.kernel
-	rm -f $(OBJS) *.o */*.o */*/*.o
-	rm -f $(OBJS:.o=.d) *.d */*.d */*/*.d
+	rm -f $(OBJS) *.o */*.o */*/*.o */*/*/*.o
+	rm -f $(OBJS:.o=.d) *.d */*.d */*/*.d */*/*/*.d
+	
 
 install: install-headers install-kernel
 
