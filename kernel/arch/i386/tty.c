@@ -5,7 +5,7 @@
 
 #include <kernel/tty.h>
 
-#include "vga.h"
+#include "include/vga.h"
 
 
 bool escaped = false;
