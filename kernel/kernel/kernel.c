@@ -10,20 +10,20 @@
 
 void kernel_main(void){
     terminal_init();
-    printf("Initialising GDT... ");
+    printf("Initialising GDT...\t\t");
     init_gdt();
     printf("\x1B\x0A""OK.""\x1B\x0F""\n");
 
-    printf("Initialising IDT... ");
+    printf("Initialising IDT...\t\t");
     init_idt();
     printf("\x1B\x0A""OK.""\x1B\x0F""\n");
 
-    printf("Initialising PIC... ");
+    printf("Initialising PIC...\t\t");
     pic_init();
     printf("\x1B\x0A""OK.""\x1B\x0F""\n");
 
 
-    printf("Enabling interrupts... ");
+    printf("Enabling interrupts...\t\t");
     __asm__ volatile("sti");
     printf("\x1B\x0A""OK.""\x1B\x0F""\n");
 
