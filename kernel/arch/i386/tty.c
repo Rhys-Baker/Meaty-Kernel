@@ -92,6 +92,16 @@ void terminal_putchar(char c){
 		return;
 	}
 
+	// Tab
+	if(c == '\t'){
+		terminal_column += (terminal_column+4)%4;
+		if(terminal_column >= VGA_WIDTH){
+			terminal_row++;
+			terminal_column -= VGA_WIDTH;
+		}
+		return;
+	}
+
 	terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
 	if (++terminal_column == VGA_WIDTH) {
 		terminal_column = 0;
