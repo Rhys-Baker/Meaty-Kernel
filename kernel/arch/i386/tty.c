@@ -6,6 +6,7 @@
 #include <kernel/tty.h>
 
 #include "include/vga.h"
+#include "include/io.h"
 
 
 bool escaped = false;
@@ -20,6 +21,9 @@ static uint8_t terminal_color;
 static uint16_t *terminal_buffer;
 
 void terminal_init(void){
+	outb(0x3D4, 0x0A); // Select Cursor Start register
+	outb(0x3D5, 0x20); // Set bit 5 = 1 (disable cursor)
+
     terminal_row = 0;
     terminal_column = 0;
     terminal_color = vga_entry_color(VGA_COLOR_WHITE, VGA_COLOR_BLACK);
