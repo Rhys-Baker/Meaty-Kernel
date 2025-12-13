@@ -30,7 +30,7 @@
 
 /// @brief Send the End Of Interrupt control signal to the PIC(s)
 /// @param irq IRQ number that was serviced.
-void pic_sendEOI(uint8_t irq);
+void pic_send_eoi(uint8_t irq);
 
 /// @brief Initialise the PIC controllers.
 /// @param offset1 Vector offset for the master PIC. Vectors become offset1..offset1+7
@@ -55,6 +55,8 @@ uint16_t pic_get_irr(void);
 /// @brief Get the combined value of the cascaded PICs in-service register
 /// @return Cascaded PICs ISR value
 uint16_t pic_get_isr(void);
+
+void pic_ack(void);
 
 /// @brief Initialise the PIC chip, remap IRQs, and set every bit in the mask
 void pic_init(void);

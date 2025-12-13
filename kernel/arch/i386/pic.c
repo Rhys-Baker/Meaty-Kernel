@@ -74,10 +74,16 @@ uint16_t pic_get_isr(void) {
     return __pic_get_irq_reg(PIC_READ_ISR);
 }
 
+void pic_ack(void){
+    return;
+}
+
 void pic_init(void){
     // Suggest remapping to 0x20-0x27 and 0x28-0x2F
     pic_remap(0x20, 0x28);
-    pic_disable(); // Fully masks the PIC chip before enabling interrupts.
+    //pic_disable(); // Fully masks the PIC chip before enabling interrupts.
+    outb(PIC1_DATA, 0b11111101);
+    outb(PIC2_DATA, 0b11111111);
 }
 
 

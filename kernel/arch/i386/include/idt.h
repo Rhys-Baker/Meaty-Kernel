@@ -7,6 +7,14 @@ typedef struct idt_entry {
     uint8_t type_attributes;
 } idt_entry;
 
+struct interrupt_frame {
+    unsigned int eip;
+    unsigned int cs;
+    unsigned int flags;
+    unsigned int sp;
+    unsigned int ss;
+};
+
 
 extern uint8_t idt[256][8];
 

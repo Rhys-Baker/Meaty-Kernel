@@ -32,13 +32,9 @@ void init_idt(void){
         for (int j = 0; j < 8; j++)
             idt[i][j] = 0;
 
-    idt_entry idt_entry_division_error = {
-        .offset = (uint32_t)&isr_division_error,
-        .selector = 0x08, /* Code segment */
-        .type_attributes = 0x8E /* 32-bit interrupt gate in ring 0 */
-    };
-    encode_idt_entry(idt[0], idt_entry_division_error);
-
+    
+    encode_faults();
+    encode_idt_entry(idt[0x21], idt_entry_keyboard_interrupt);
 
     uint16_t limit = sizeof(idt) - 1;
     uint32_t base = (uint32_t)&idt;
