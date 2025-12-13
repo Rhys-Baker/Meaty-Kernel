@@ -4,3 +4,4 @@ sysroot
 .vscode/c_cpp_properties.json
 *.i
 *.s
+kernel/arch/i386/irq/Meat.code-workspace
