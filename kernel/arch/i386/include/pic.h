@@ -56,3 +56,5 @@ uint16_t pic_get_irr(void);
 /// @return Cascaded PICs ISR value
 uint16_t pic_get_isr(void);
 
+/// @brief Initialise the PIC chip, remap IRQs, and set every bit in the mask
+void pic_init(void);
