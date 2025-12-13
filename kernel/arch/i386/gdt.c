@@ -1,9 +1,9 @@
-#include <kernel/gdt.h>
+#include "include/gdt.h"
 #include <stdio.h>
 
 uint8_t gdt[5][8];
 
-void encode_gdt_entry(uint8_t *target, GDTEntry source){
+void encode_gdt_entry(uint8_t *target, gdt_entry source){
     if(source.limit > 0xFFFFF) {
         // GDT cannot encode limits larger than 0xFFFFF
         printf("\x1B\x0C""E: GDT cannot encode limits larger than 0xFFFFF\x1B\x0F\n");
@@ -25,19 +25,19 @@ void encode_gdt_entry(uint8_t *target, GDTEntry source){
 }
 
 void init_gdt(void){
-    GDTEntry null_descriptor = {
+    gdt_entry null_descriptor = {
         .base = 0x00,
         .limit = 0x00,
         .access_byte = 0x00,
         .flags = 0x00
     };
-    GDTEntry kernel_mode_code_segment = {
+    gdt_entry kernel_mode_code_segment = {
         .base  = 0x00000000,
         .limit = 0xFFFFF,
         .access_byte = 0x9A,
         .flags = 0x0C
     };
-    GDTEntry kernel_mode_data_segment = {
+    gdt_entry kernel_mode_data_segment = {
         .base  = 0x00000000,
         .limit = 0xFFFFF,
         .access_byte = 0x92,

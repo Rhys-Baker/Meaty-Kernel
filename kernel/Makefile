@@ -2,7 +2,7 @@ DEFAULT_HOST!=../default-host.sh
 HOST?=DEFAULT_HOST
 HOSTARCH!=../target-triplet-to-arch.sh $(HOST)
 
-CFLAGS?=-O2 -g
+CFLAGS?=-O0 -g
 CPPFLAGS?=
 LDFLAGS?=
 LIBS?=
@@ -23,8 +23,11 @@ ARCHDIR=arch/$(HOSTARCH)
 include $(ARCHDIR)/make.config
 
 CFLAGS:=$(CFLAGS) $(KERNEL_ARCH_CFLAGS)
-# Disable FPU instructions only for ISR files
-$(KERNEL_ARCH_IRQ_OBJS): CFLAGS += -mno-80387 -mno-fp-ret-in-387 -mno-sse -mno-sse2
+# Set special flags for ISR compilation
+$(KERNEL_ARCH_IRQ_OBJS): CFLAGS := -O0 -g -ffreestanding -Wall -Wextra \
+                             -fno-stack-protector \
+                             -mno-80387 -mno-fp-ret-in-387 -mno-sse -mno-sse2
+
 CPPFLAGS:=$(CPPFLAGS) $(KERNEL_ARCH_CPPFLAGS)
 LDFLAGS:=$(LDFLAGS) $(KERNEL_ARCH_LDFLAGS)
 LIBS:=$(LIBS) $(KERNEL_ARCH_LIBS)

@@ -5,7 +5,7 @@ global load_idt
 section .data
 idtr:
 dw      0 ; For limit storage
-dd      0 ; For limit storage
+dd      0 ; For base storage
 
 section .text
 ; void load_idt(uint16_t limit, uint32_t base);
@@ -15,7 +15,6 @@ load_idt:
     mov     [idtr], ax
     ; Store base
     mov     eax, [esp + 8]
-    ; add   eax, [ESP + 12] ; if including offset for non-flat models
     mov     [idtr + 2], eax
     ; Load gdt and return
     lidt    [idtr]
