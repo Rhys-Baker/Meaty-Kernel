@@ -97,7 +97,7 @@ idt_entry idt_entry_double_fault = {
     .type_attributes = 0x8E
 };
 __attribute__((interrupt, noinline)) void isr_double_fault(struct interrupt_frame *frame, uint32_t error_code) {
-    printf("\n ""\x1B\x0C""EXCEPTION: DOUBLE FAULT. HALTING.""\x1B\x0F""\n");
+    printf("\n ""\x1B\x0C""EXCEPTION: DOUBLE FAULT. (0x%x) HALTING.""\x1B\x0F""\n", error_code);
     while(1) { asm volatile("hlt"); }
 }
 
@@ -119,7 +119,7 @@ idt_entry idt_entry_invalid_tss = {
     .type_attributes = 0x8E
 };
 __attribute__((interrupt, noinline)) void isr_invalid_tss(struct interrupt_frame *frame, uint32_t error_code) {
-    printf("\n ""\x1B\x0C""EXCEPTION: INVALID TSS. HALTING.""\x1B\x0F""\n");
+    printf("\n ""\x1B\x0C""EXCEPTION: INVALID TSS. (0x%x) HALTING.""\x1B\x0F""\n", error_code);
     while(1) { asm volatile("hlt"); }
 }
 
@@ -130,7 +130,7 @@ idt_entry idt_entry_segment_not_present = {
     .type_attributes = 0x8E
 };
 __attribute__((interrupt, noinline)) void isr_segment_not_present(struct interrupt_frame *frame, uint32_t error_code) {
-    printf("\n ""\x1B\x0C""EXCEPTION: SEGMENT NOT PRESENT. HALTING.""\x1B\x0F""\n");
+    printf("\n ""\x1B\x0C""EXCEPTION: SEGMENT NOT PRESENT. (0x%x) HALTING.""\x1B\x0F""\n", error_code);
     while(1) { asm volatile("hlt"); }
 }
 
@@ -141,7 +141,7 @@ idt_entry idt_entry_stack_segment_fault = {
     .type_attributes = 0x8E
 };
 __attribute__((interrupt, noinline)) void isr_stack_segment_fault(struct interrupt_frame *frame, uint32_t error_code) {
-    printf("\n ""\x1B\x0C""EXCEPTION: STACK SEGMENT FAULT. HALTING.""\x1B\x0F""\n");
+    printf("\n ""\x1B\x0C""EXCEPTION: STACK SEGMENT FAULT. (0x%x) HALTING.""\x1B\x0F""\n", error_code);
     while(1) { asm volatile("hlt"); }
 }
 
@@ -152,7 +152,7 @@ idt_entry idt_entry_general_protection_fault = {
     .type_attributes = 0x8E
 };
 __attribute__((interrupt, noinline)) void isr_general_protection_fault(struct interrupt_frame *frame, uint32_t error_code) {
-    printf("\n ""\x1B\x0C""EXCEPTION: GENERAL PROTECTION FAULT.(0x%x) HALTING.""\x1B\x0F""\n", error_code);
+    printf("\n ""\x1B\x0C""EXCEPTION: GENERAL PROTECTION FAULT. (0x%x) HALTING.""\x1B\x0F""\n", error_code);
     while(1) { asm volatile("hlt"); }
 }
 
@@ -163,7 +163,7 @@ idt_entry idt_entry_page_fault = {
     .type_attributes = 0x8E
 };
 __attribute__((interrupt, noinline)) void isr_page_fault(struct interrupt_frame *frame, uint32_t error_code) {
-    printf("\n ""\x1B\x0C""EXCEPTION: PAGE FAULT. HALTING.""\x1B\x0F""\n");
+    printf("\n ""\x1B\x0C""EXCEPTION: PAGE FAULT. (0x%x) HALTING.""\x1B\x0F""\n", error_code);
     while(1) { asm volatile("hlt"); }
 }
 
@@ -185,7 +185,7 @@ idt_entry idt_alignment_check = {
     .type_attributes = 0x8E
 };
 __attribute__((interrupt, noinline)) void isr_alignment_check(struct interrupt_frame *frame, uint32_t error_code) {
-    printf("\n ""\x1B\x0C""EXCEPTION: ALIGNMENT CHECK. HALTING.""\x1B\x0F""\n");
+    printf("\n ""\x1B\x0C""EXCEPTION: ALIGNMENT CHECK. (0x%x) HALTING.""\x1B\x0F""\n", error_code);
     while(1) { asm volatile("hlt"); }
 }
 
@@ -229,7 +229,7 @@ idt_entry idt_control_protection_exception = {
     .type_attributes = 0x8E
 };
 __attribute__((interrupt, noinline)) void isr_control_protection_exception(struct interrupt_frame *frame, uint32_t error_code) {
-    printf("\n ""\x1B\x0C""EXCEPTION:CONTROL PROTECTION EXCEPTION. HALTING.""\x1B\x0F""\n");
+    printf("\n ""\x1B\x0C""EXCEPTION:CONTROL PROTECTION EXCEPTION. (0x%x) HALTING.""\x1B\x0F""\n", error_code);
     while(1) { asm volatile("hlt"); }
 }
 
@@ -251,7 +251,7 @@ idt_entry idt_vmm_communication_exception = {
     .type_attributes = 0x8E
 };
 __attribute__((interrupt, noinline)) void isr_vmm_communication_exception(struct interrupt_frame *frame, uint32_t error_code) {
-    printf("\n ""\x1B\x0C""EXCEPTION: VMM COMMUNICATION EXCEPTION. HALTING.""\x1B\x0F""\n");
+    printf("\n ""\x1B\x0C""EXCEPTION: VMM COMMUNICATION EXCEPTION. (0x%x) HALTING.""\x1B\x0F""\n", error_code);
     while(1) { asm volatile("hlt"); }
 }
 
@@ -262,7 +262,7 @@ idt_entry idt_security_exception = {
     .type_attributes = 0x8E
 };
 __attribute__((interrupt, noinline)) void isr_security_exception(struct interrupt_frame *frame, uint32_t error_code) {
-    printf("\n ""\x1B\x0C""EXCEPTION: SECURITY EXCEPTION. HALTING.""\x1B\x0F""\n");
+    printf("\n ""\x1B\x0C""EXCEPTION: SECURITY EXCEPTION. (0x%x) HALTING.""\x1B\x0F""\n", error_code);
     while(1) { asm volatile("hlt"); }
 }
 
