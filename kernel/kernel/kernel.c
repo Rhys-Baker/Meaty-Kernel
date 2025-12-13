@@ -9,8 +9,6 @@
 #include "../arch/i386/include/faults.h"
 
 void kernel_main(void){
-    int a = 1;
-
     terminal_init();
     printf("Initialising GDT... ");
     init_gdt();
@@ -23,12 +21,13 @@ void kernel_main(void){
     printf("Initialising PIC... ");
     pic_init();
     printf("\x1B\x0A""OK.""\x1B\x0F""\n");
-    
+
+
     printf("Enabling interrupts... ");
     __asm__ volatile("sti");
     printf("\x1B\x0A""OK.""\x1B\x0F""\n");
 
-    printf("Testing Division Error ISR...\n");
-    a=1/0;
-    printf("Variable a = 0x%x\n", a);
+
+    printf("\nDone!\n");
+    while(1){__asm__ volatile("hlt");}
 }
