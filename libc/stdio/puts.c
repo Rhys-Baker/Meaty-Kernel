@@ -6,6 +6,7 @@ int puts(const char *string){
         if(putchar(string[i]) == EOF){
             return EOF;
         }
+        i++;
     }
     if(putchar('\n') == EOF){
         return EOF;
