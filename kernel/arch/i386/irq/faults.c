@@ -10,6 +10,7 @@ idt_entry idt_entry_division_error = {
 };
 __attribute__((interrupt, noinline)) void isr_division_error(struct interrupt_frame *frame){
     printf("\n ""\x1B\x0C""EXCEPTION: DIVISION ERROR. HALTING.""\x1B\x0F""\n");
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -21,6 +22,7 @@ idt_entry idt_entry_debug = {
 };
 __attribute__((interrupt, noinline)) void isr_debug(struct interrupt_frame *frame){
     printf("\n ""\x1B\x0C""EXCEPTION: DEBUG. HALTING.""\x1B\x0F""\n");
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -32,6 +34,7 @@ idt_entry idt_entry_non_maskable_interrupt = {
 };
 __attribute__((interrupt, noinline)) void isr_non_maskable_interrupt(struct interrupt_frame *frame) {
     printf("\n ""\x1B\x0C""EXCEPTION: NON-MASKABLE INTERRUPT. HALTING.""\x1B\x0F""\n");
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -43,6 +46,7 @@ idt_entry idt_entry_breakpoint = {
 };
 __attribute__((interrupt, noinline)) void isr_breakpoint(struct interrupt_frame *frame) {
     printf("\n ""\x1B\x0C""EXCEPTION: BREAKPOINT HALTING.""\x1B\x0F""\n");
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -54,6 +58,7 @@ idt_entry idt_entry_overflow = {
 };
 __attribute__((interrupt, noinline)) void isr_overflow(struct interrupt_frame *frame) {
     printf("\n ""\x1B\x0C""EXCEPTION: OVERFLOW. HALTING.""\x1B\x0F""\n");
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -65,6 +70,7 @@ idt_entry idt_entry_bound_range_exceeded = {
 };
 __attribute__((interrupt, noinline)) void isr_bound_range_exceeded(struct interrupt_frame *frame) {
     printf("\n ""\x1B\x0C""EXCEPTION: BOUND RANGE EXCEEDED. HALTING.""\x1B\x0F""\n");
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -76,6 +82,7 @@ idt_entry idt_entry_invalid_opcode = {
 };
 __attribute__((interrupt, noinline)) void isr_invalid_opcode(struct interrupt_frame *frame) {
     printf("\n ""\x1B\x0C""EXCEPTION: INVALID OPCODE. HALTING.""\x1B\x0F""\n");
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -87,6 +94,7 @@ idt_entry idt_entry_device_not_available = {
 };
 __attribute__((interrupt, noinline)) void isr_device_not_available(struct interrupt_frame *frame) {
     printf("\n ""\x1B\x0C""EXCEPTION: DEVICE NOT AVAILABLE. HALTING.""\x1B\x0F""\n");
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -98,6 +106,7 @@ idt_entry idt_entry_double_fault = {
 };
 __attribute__((interrupt, noinline)) void isr_double_fault(struct interrupt_frame *frame, uint32_t error_code) {
     printf("\n ""\x1B\x0C""EXCEPTION: DOUBLE FAULT. (0x%x) HALTING.""\x1B\x0F""\n", error_code);
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -109,6 +118,7 @@ idt_entry idt_entry_coprocessor_segment_overrun = {
 };
 __attribute__((interrupt, noinline)) void isr_coprocessor_segment_overrun(struct interrupt_frame *frame) {
     printf("\n ""\x1B\x0C""EXCEPTION: COPROCESSOR SEGMENT OVERRUN. HALTING.""\x1B\x0F""\n");
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -120,6 +130,7 @@ idt_entry idt_entry_invalid_tss = {
 };
 __attribute__((interrupt, noinline)) void isr_invalid_tss(struct interrupt_frame *frame, uint32_t error_code) {
     printf("\n ""\x1B\x0C""EXCEPTION: INVALID TSS. (0x%x) HALTING.""\x1B\x0F""\n", error_code);
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -131,6 +142,7 @@ idt_entry idt_entry_segment_not_present = {
 };
 __attribute__((interrupt, noinline)) void isr_segment_not_present(struct interrupt_frame *frame, uint32_t error_code) {
     printf("\n ""\x1B\x0C""EXCEPTION: SEGMENT NOT PRESENT. (0x%x) HALTING.""\x1B\x0F""\n", error_code);
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -142,6 +154,7 @@ idt_entry idt_entry_stack_segment_fault = {
 };
 __attribute__((interrupt, noinline)) void isr_stack_segment_fault(struct interrupt_frame *frame, uint32_t error_code) {
     printf("\n ""\x1B\x0C""EXCEPTION: STACK SEGMENT FAULT. (0x%x) HALTING.""\x1B\x0F""\n", error_code);
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -153,6 +166,7 @@ idt_entry idt_entry_general_protection_fault = {
 };
 __attribute__((interrupt, noinline)) void isr_general_protection_fault(struct interrupt_frame *frame, uint32_t error_code) {
     printf("\n ""\x1B\x0C""EXCEPTION: GENERAL PROTECTION FAULT. (0x%x) HALTING.""\x1B\x0F""\n", error_code);
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -164,6 +178,7 @@ idt_entry idt_entry_page_fault = {
 };
 __attribute__((interrupt, noinline)) void isr_page_fault(struct interrupt_frame *frame, uint32_t error_code) {
     printf("\n ""\x1B\x0C""EXCEPTION: PAGE FAULT. (0x%x) HALTING.""\x1B\x0F""\n", error_code);
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -175,6 +190,7 @@ idt_entry idt_x87_floating_point_exception = {
 };
 __attribute__((interrupt, noinline)) void isr_x87_floating_point_exception(struct interrupt_frame *frame) {
     printf("\n ""\x1B\x0C""EXCEPTION: X87 FLOATING POINT EXCEPTION HALTING.""\x1B\x0F""\n");
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -186,6 +202,7 @@ idt_entry idt_alignment_check = {
 };
 __attribute__((interrupt, noinline)) void isr_alignment_check(struct interrupt_frame *frame, uint32_t error_code) {
     printf("\n ""\x1B\x0C""EXCEPTION: ALIGNMENT CHECK. (0x%x) HALTING.""\x1B\x0F""\n", error_code);
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -197,6 +214,7 @@ idt_entry idt_machine_check = {
 };
 __attribute__((interrupt, noinline)) void isr_machine_check(struct interrupt_frame *frame) {
     printf("\n ""\x1B\x0C""EXCEPTION: MACHINE CHECK. HALTING.""\x1B\x0F""\n");
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -208,6 +226,7 @@ idt_entry idt_simd_floating_point_exception = {
 };
 __attribute__((interrupt, noinline)) void isr_simd_floating_point_exception(struct interrupt_frame *frame) {
     printf("\n ""\x1B\x0C""EXCEPTION: SIMD FLOATING POINT EXCEPTION. HALTING.""\x1B\x0F""\n");
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -219,6 +238,7 @@ idt_entry idt_virtualization_exception = {
 };
 __attribute__((interrupt, noinline)) void isr_virtualization_exception(struct interrupt_frame *frame) {
     printf("\n ""\x1B\x0C""EXCEPTION: VIRTUALIZATION EXCEPTION. HALTING.""\x1B\x0F""\n");
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -230,6 +250,7 @@ idt_entry idt_control_protection_exception = {
 };
 __attribute__((interrupt, noinline)) void isr_control_protection_exception(struct interrupt_frame *frame, uint32_t error_code) {
     printf("\n ""\x1B\x0C""EXCEPTION:CONTROL PROTECTION EXCEPTION. (0x%x) HALTING.""\x1B\x0F""\n", error_code);
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -241,6 +262,7 @@ idt_entry idt_hypervisor_injection_exception = {
 };
 __attribute__((interrupt, noinline)) void isr_hypervisor_injection_exception(struct interrupt_frame *frame) {
     printf("\n ""\x1B\x0C""EXCEPTION: HYPERVISOR INJECTION EXCEPTION. HALTING.""\x1B\x0F""\n");
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -252,6 +274,7 @@ idt_entry idt_vmm_communication_exception = {
 };
 __attribute__((interrupt, noinline)) void isr_vmm_communication_exception(struct interrupt_frame *frame, uint32_t error_code) {
     printf("\n ""\x1B\x0C""EXCEPTION: VMM COMMUNICATION EXCEPTION. (0x%x) HALTING.""\x1B\x0F""\n", error_code);
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -263,6 +286,7 @@ idt_entry idt_security_exception = {
 };
 __attribute__((interrupt, noinline)) void isr_security_exception(struct interrupt_frame *frame, uint32_t error_code) {
     printf("\n ""\x1B\x0C""EXCEPTION: SECURITY EXCEPTION. (0x%x) HALTING.""\x1B\x0F""\n", error_code);
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
@@ -274,6 +298,7 @@ idt_entry idt_fpu_error_interrupt = {
 };
 __attribute__((interrupt, noinline)) void isr_fpu_error_interrupt(struct interrupt_frame *frame) {
     printf("\n ""\x1B\x0C""EXCEPTION: FPU ERROR INTERRUPT""\x1B\x0F""\n");
+    asm volatile("cli");
     while(1) { asm volatile("hlt"); }
 }
 
