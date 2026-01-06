@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #include <kernel/tty.h>
 
@@ -14,7 +15,6 @@ void kernel_init(void){
 }
 
 void kernel_main(void){
-    terminal_init();
     printf("Initialising GDT...\t\t");
     init_gdt();
     printf("\x1B\x0A""OK.""\x1B\x0F""\n");
@@ -32,7 +32,8 @@ void kernel_main(void){
     __asm__ volatile("sti");
     printf("\x1B\x0A""OK.""\x1B\x0F""\n");
 
+    
 
-    printf("\nDone!\n");
+
     while(1){__asm__ volatile("hlt");}
 }
