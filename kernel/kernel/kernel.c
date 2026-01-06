@@ -8,6 +8,11 @@
 
 #include "../arch/i386/include/faults.h"
 
+void kernel_init(void){
+    terminal_init();
+    return;
+}
+
 void kernel_main(void){
     terminal_init();
     printf("Initialising GDT...\t\t");

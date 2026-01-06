@@ -50,6 +50,10 @@ _start:
     extern _init
     call _init
 
+    ; Call the kernel_init function for initialisation steps
+    extern kernel_init
+    call kernel_init
+
     ; Call the kernel C entry point
     extern kernel_main
     call kernel_main
